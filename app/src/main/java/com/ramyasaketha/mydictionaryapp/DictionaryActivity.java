@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,12 +56,6 @@ public class DictionaryActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            if(isOnLine()) {
-                requestData("http://api.wordnik.com:80/v4/word.json/killer/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5");
-            } else {
-                Toast.makeText(this, "Network not available", Toast.LENGTH_SHORT).show();
-                return false;
-            }
         }
 
         return false;
@@ -72,7 +67,7 @@ public class DictionaryActivity extends ActionBarActivity {
     }
 
     public void updateDisplay(String message) {
-        output.append(message + "\n");
+        output.setText(message);
     }
 
     protected boolean isOnLine() {
@@ -104,8 +99,13 @@ public class DictionaryActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            updateDisplay(s);
-
+            ArrayList<String> arraylist = JsonParser.parseContents(s);
+            StringBuilder str = new StringBuilder();
+            for(int i=0;i<arraylist.size();i++) {
+                str.append(arraylist.get(i));
+                str.append("\n\n\n");
+            }
+            updateDisplay(str.toString());
             tasks.remove(this);
             if(tasks.size() == 0) {
                 pb.setVisibility(View.INVISIBLE);
@@ -115,6 +115,24 @@ public class DictionaryActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(String... values) {
             updateDisplay(values[0]);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        output = null;
+    }
+
+    public void toSearch(View view) {
+        EditText editView = (EditText)findViewById(R.id.editText);
+        String text = editView.getText().toString();
+        if (text != null) {
+            if (isOnLine()) {
+                requestData(JsonParser.JsonURL(text));
+            } else {
+                Toast.makeText(this, "Network not available", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

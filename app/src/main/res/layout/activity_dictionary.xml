@@ -22,4 +22,25 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/button"
+        android:layout_toLeftOf="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:onClick="toSearch"
+        android:hint="Search"
+        android:id="@+id/button"
+        android:layout_alignTop="@+id/textview"
+        android:layout_alignRight="@+id/textview"
+        android:layout_alignEnd="@+id/textview" />
+
 </RelativeLayout>
