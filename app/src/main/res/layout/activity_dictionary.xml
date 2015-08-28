@@ -13,7 +13,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:text=""/>
+        android:text=""
+        android:layout_below="@+id/editText" />
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -39,8 +40,8 @@
         android:onClick="toSearch"
         android:hint="Search"
         android:id="@+id/button"
-        android:layout_alignTop="@+id/textview"
-        android:layout_alignRight="@+id/textview"
-        android:layout_alignEnd="@+id/textview" />
+        android:layout_alignTop="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

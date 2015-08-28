@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,7 +85,6 @@ public class DictionaryActivity extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-            updateDisplay("Starting Class...");
             if(tasks.size() == 0) {
                 pb.setVisibility(View.VISIBLE);
             }
@@ -105,11 +105,14 @@ public class DictionaryActivity extends ActionBarActivity {
                 str.append(arraylist.get(i));
                 str.append("\n\n\n");
             }
-            updateDisplay(str.toString());
+            String val = str.toString();
+            updateDisplay(val);
+            Log.i("DictionaryActivity", "String val: " + val);
             tasks.remove(this);
             if(tasks.size() == 0) {
                 pb.setVisibility(View.INVISIBLE);
             }
+
         }
 
         @Override
