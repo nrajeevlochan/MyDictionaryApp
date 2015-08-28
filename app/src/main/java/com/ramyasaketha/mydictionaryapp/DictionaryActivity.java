@@ -23,9 +23,9 @@ import java.util.List;
 
 public class DictionaryActivity extends ActionBarActivity {
 
-    TextView output;
-    ProgressBar pb;
-    List<MyTask> tasks;
+    private TextView output;
+    private ProgressBar pb;
+    private List<MyTask> tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
